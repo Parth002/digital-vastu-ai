@@ -42,7 +42,7 @@ const Testimonials: React.FC = () => {
                         quote={t('testimonial3_quote')}
                         name={t('testimonial3_name')}
                         location={t('testimonial3_location')}
-                        image="https://xsgames.co/randomusers/assets/avatars/female/56.jpg"
+                        image="https://xsgames.co/randomusers/assets/avatars/female/60.jpg"
                     />
                 </div>
             </div>
