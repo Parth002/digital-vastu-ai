@@ -1,5 +1,7 @@
 
-import React, { createContext, useState, useCallback, useMemo, useEffect } from 'react';
+import React, { createContext, useState, useCallback, useMemo } from 'react';
+import enData from '../i18n/en.json';
+import hiData from '../i18n/hi.json';
 
 type Language = 'en' | 'hi';
 type Translations = Record<string, string>;
@@ -14,33 +16,7 @@ export const LanguageContext = createContext<LanguageContextType | undefined>(un
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('en');
-  const [translations, setTranslations] = useState<Record<Language, Translations>>({ en: {}, hi: {} });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTranslations = async () => {
-      try {
-        const [enRes, hiRes] = await Promise.all([
-          fetch('src/i18n/en.json'),
-          fetch('src/i18n/hi.json')
-        ]);
-        if (!enRes.ok || !hiRes.ok) {
-            throw new Error('Failed to fetch translation files');
-        }
-        const enData = await enRes.json();
-        const hiData = await hiRes.json();
-        setTranslations({ en: enData, hi: hiData });
-      } catch (error) {
-        console.error("Failed to load translations:", error);
-        // Fallback to empty to avoid crashing the app, it will just show keys
-        setTranslations({ en: {}, hi: {} });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTranslations();
-  }, []); // Empty dependency array ensures this runs only once on mount
+  const [translations, setTranslations] = useState<Record<Language, Translations>>({ en: enData, hi: hiData });
 
   const t = useCallback((key: string, replacements?: Record<string, string | number>): string => {
     let translation = translations[language]?.[key] || translations['en']?.[key] || key;
@@ -57,10 +33,6 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setLanguage,
     t
   }), [language, t]);
-
-  if (loading) {
-    return null; // Or a loading spinner, but null is fine to prevent flash of untranslated content
-  }
 
   return (
     <LanguageContext.Provider value={value}>
