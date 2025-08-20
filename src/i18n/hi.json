@@ -1,4 +1,3 @@
-
 {
   "header_title": "डिजिटल वास्तु",
   "lang_select_label": "भाषा",
@@ -21,6 +20,8 @@
   "form_upload_drag": "या खींचें और छोड़ें",
   "form_upload_info": "पीएनजी, जेपीजी, वेबपी, पीडीएफ 4एमबी तक",
   "form_upload_selected": "चयनित: {{fileName}}",
+  "form_remove_file_label": "फ़ाइल हटाएं",
+  "form_alt_preview": "फ्लोर प्लान पूर्वावलोकन",
   "form_direction_label_select": "२. मुख्य प्रवेश द्वार की दिशा चुनें",
   "form_direction_placeholder_select": "एक दिशा चुनें...",
   "direction_north": "उत्तर (North)",
